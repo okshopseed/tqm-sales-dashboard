@@ -383,6 +383,7 @@ function tablePlan(D,li){
   let h='<table><thead><tr><th>แผน / ช่องทาง</th>'+MONTHS.map(m=>`<th>${m}</th>`).join("")+'<th>รวม</th></tr></thead><tbody>';
   const totalsByMonth=new Array(12).fill(0); let grand=0;
   D.plan.rows.forEach(r=>{
+    if((r.name||"").trim()==="Totals") return; // Totals = รวมแผน อยู่แล้ว ไม่ต้องแสดงซ้ำ
     const mArr=planMonthly(r.target,r.m,li);
     mArr.forEach((v,i)=>{ if(v) totalsByMonth[i]+=v; });
     grand+=r.target;
